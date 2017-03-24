@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Hello</string>
+
+    <string name="name_box">Name</string>
+    <string name="cell_box">Cell</string>
+    <string name="email_box">Email</string>
+    <string name="company_box">Company</string>
+    <string name="website_box">Website</string>
+
+
 </resources>
