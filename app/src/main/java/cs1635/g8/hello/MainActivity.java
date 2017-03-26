@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.ListView;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import layout.TestFragment;
 import layout.fuser_profile;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (savedInstanceState == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.content_frame, new fuser_profile())
+                    .commit();
+        }
+
         mOptions = getResources().getStringArray(R.array.options_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.drawer);
@@ -42,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         mDrawerList.setOnItemClickListener(new MainActivity.DrawerItemClickListener());
 
-        FragmentManager fragmentManager = 
+
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener{
@@ -59,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 if(fragmentManager.findFragmentById(R.id.frag_user_profile) != null) {
                     fragmentManager.beginTransaction().show(fragmentManager.findFragmentById(R.id.frag_user_profile));
                 } else {
-                    fragmentManager.beginTransaction().add(R.id.content_frame, new fuser_profile(), "frag_user_profile").commit();
+                    fragmentManager.beginTransaction().add(R.id.content_frame, new fuser_profile()).commit();
                 }
                 if (fragmentManager.findFragmentById(R.id.test_frag)  != null){
                     fragmentManager.beginTransaction().hide(fragmentManager.findFragmentById(R.id.test_frag));
@@ -69,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 if(fragmentManager.findFragmentById(R.id.test_frag) != null) {
                     fragmentManager.beginTransaction().show(fragmentManager.findFragmentById(R.id.test_frag));
                 } else {
-                    fragmentManager.beginTransaction().add(R.id.content_frame, new fuser_profile(), "test_frag").commit();
+                    fragmentManager.beginTransaction().add(R.id.content_frame, new TestFragment()).commit();
                 }
                 if (fragmentManager.findFragmentById(R.id.frag_user_profile)  != null){
                     fragmentManager.beginTransaction().hide(fragmentManager.findFragmentById(R.id.frag_user_profile));

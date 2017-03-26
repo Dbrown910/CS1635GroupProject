@@ -131,11 +131,9 @@ public class fuser_profile extends Fragment {
                 }
             }
 
-            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.content_frame, fragment);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
+           getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_frame, new TestFragment())
+                    .commit();
         }
     }
 
