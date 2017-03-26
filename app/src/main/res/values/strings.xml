@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Hello</string>
+    <string name="UserEditTitle">Edit Profile</string>
+    <string name="HomeScreenTitle">Contact Share</string>
 
     <string name="name_box">Name</string>
     <string name="cell_box">Cell</string>
@@ -7,5 +9,21 @@
     <string name="company_box">Company</string>
     <string name="website_box">Website</string>
 
+    <string name="topSVlabel">Nearby Friends</string>
+    <string name="bottomSVlabel">Unknown Users</string>
+    <string name="title_activity_home__screen">Home_Screen</string>
+
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string-array name="options_array">
+        <item>My Profile</item>
+        <item>Settings</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
