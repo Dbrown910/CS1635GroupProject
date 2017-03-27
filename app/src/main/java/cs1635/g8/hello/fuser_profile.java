@@ -2,8 +2,10 @@ package cs1635.g8.hello;
 
 
 import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +51,8 @@ public class fuser_profile extends Fragment {
         pro_pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setProfilePicture();
+                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i, RESULT_LOAD_IMAGE);
             }
         });
 
@@ -74,14 +77,20 @@ public class fuser_profile extends Fragment {
             Bitmap bitmap = null;
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(c.getContentResolver(), selectedImage);
+                setProfilePicture(bitmap);
+
+                Log.d("GET_IMAGE", "success");
             } catch (FileNotFoundException e) {
                 // TODO Auto-generated catch block
+                Log.d("GET_IMAGE", "failed");
                 e.printStackTrace();
             } catch (IOException e) {
                 // TODO Auto-generated catch block
+                Log.d("GET_IMAGE", "failed");
                 e.printStackTrace();
             }
         }
+
     }
 
     private void saveInfo(View v){
@@ -126,10 +135,10 @@ public class fuser_profile extends Fragment {
         }
     }
 
-    private void setProfilePicture(){
-        Intent i = new Intent(
-                Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-        startActivityForResult(i, RESULT_LOAD_IMAGE);
+    public void setProfilePicture(Bitmap bmap) {
+        ImageButton btn;
+        btn = (ImageButton) getActivity().findViewById(R.id.imageButton);
+        BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), bmap);
+        btn.setBackground(bitmapDrawable);
     }
 }
