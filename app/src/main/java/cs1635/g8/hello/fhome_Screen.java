@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,16 +56,11 @@ public class fhome_Screen extends Fragment {
 
             TextView tv = new TextView(c);
             tv.setText(user_list[i]);
-            LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 150);
             params2.weight=1.0f;
             tv.setLayoutParams(params2);
-            Button btn = new Button(c);
-            btn.setText("Share");
-            btn.setBackgroundColor(Color.YELLOW);
-            LinearLayout.LayoutParams params3 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            btn.setLayoutParams(params3);
+            //tv.setTextSize(getResources().getDimension(R.dimen.fab_margin));
             row.addView(tv);
-            row.addView(btn);
 
             ll.addView(row);
         }

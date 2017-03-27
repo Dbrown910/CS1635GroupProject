@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Hello</string>
+    <string name="app_name">Hello!</string>
     <string name="UserEditTitle">Edit Profile</string>
     <string name="HomeScreenTitle">Contact Share</string>
 

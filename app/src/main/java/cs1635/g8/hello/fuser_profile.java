@@ -4,9 +4,6 @@ package cs1635.g8.hello;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,21 +15,10 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutCompat;
-import android.view.*;
 import android.widget.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringTokenizer;
-
-import cs1635.g8.hello.HomeScreen;
-import cs1635.g8.hello.MainActivity;
-import cs1635.g8.hello.R;
-import layout.TestFragment;
 
 public class fuser_profile extends Fragment {
 
