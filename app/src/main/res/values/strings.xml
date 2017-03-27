@@ -23,6 +23,22 @@
         <item>Settings</item>
     </string-array>
 
+    <string-array name="known_users">
+        <item>Dave Chappelle</item>
+        <item>Kanye West</item>
+        <item>Michael Jordan</item>
+        <item>John Calipari</item>
+        <item>Bill Gates</item>
+        <item>Jack Daniels</item>
+    </string-array>
+
+    <string-array name="unk_users">
+        <item>Frank Ocean</item>
+        <item>Andrew McCutchen</item>
+        <item>Brad Pitt</item>
+        <item>Tony Montana</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

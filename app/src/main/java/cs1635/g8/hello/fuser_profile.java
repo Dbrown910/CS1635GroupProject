@@ -1,4 +1,4 @@
-package layout;
+package cs1635.g8.hello;
 
 
 import android.content.Context;
@@ -32,6 +32,7 @@ import java.util.StringTokenizer;
 import cs1635.g8.hello.HomeScreen;
 import cs1635.g8.hello.MainActivity;
 import cs1635.g8.hello.R;
+import layout.TestFragment;
 
 public class fuser_profile extends Fragment {
 
@@ -48,7 +49,6 @@ public class fuser_profile extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override

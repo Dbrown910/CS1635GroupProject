@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context="cs1635.g8.hello.fhome_Screen"
+    android:id="@+id/frag_fhome_screen"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="cs1635.g8.hello.FhomeScreen">
+    android:layout_height="match_parent">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+
+    <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="12"
-        tools:context="cs1635.g8.hello.HomeScreen">
+        android:weightSum="12">
 
         <TextView
             android:id="@+id/textView3"
@@ -26,15 +27,19 @@
             android:textSize="20dp"/>
 
         <ScrollView
+            android:id="@+id/topSV"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5"
+            android:layout_weight="6"
             android:background="@drawable/border">
 
             <LinearLayout
+                android:id="@+id/topLL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:orientation="vertical"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"/>
         </ScrollView>
 
         <TextView
@@ -50,16 +55,17 @@
             android:textSize="20dp"/>
 
         <ScrollView
+            android:id="@+id/botSV"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5"
+            android:layout_weight="4"
             android:background="@drawable/border">
 
             <LinearLayout
+                android:id="@+id/botLL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
         </ScrollView>
-
     </LinearLayout>
 </RelativeLayout>

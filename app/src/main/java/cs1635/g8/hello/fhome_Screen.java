@@ -11,11 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
-public class FhomeScreen extends Fragment {
+public class fhome_Screen extends Fragment {
 
     Context c;
 
-    public FhomeScreen() {
+    public fhome_Screen() {
         // Required empty public constructor
     }
 
@@ -30,59 +30,71 @@ public class FhomeScreen extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_fhome_screen, container, false);
         c = v.getContext();
-        ScrollView sv;
-
-        sv = (ScrollView)v.findViewById(R.id.topSV);
-        sv.addView(setConnectedUserList((LinearLayout)v.findViewById(R.id.topLL)));
-        sv = (ScrollView)v.findViewById(R.id.botSV);
-        sv.addView(setUnknownUserList((LinearLayout)v.findViewById(R.id.botLL)));
 
         return v;
     }
 
+    @Override
+    public void onViewCreated(View v, Bundle savedInstanceState) {
+        super.onViewCreated(v, savedInstanceState);
+        setConnectedUserList((LinearLayout) v.findViewById(R.id.topLL));
+        setUnknownUserList((LinearLayout)v.findViewById(R.id.botLL));
+    }
 
-    private LinearLayout setConnectedUserList(LinearLayout ll) {
+    private void setConnectedUserList(LinearLayout ll) {
 
         String[] user_list = getResources().getStringArray(R.array.known_users);
 
-        // Create a LinearLayout element
-        LinearLayout row = new LinearLayout(c);
-        row.setOrientation(LinearLayout.HORIZONTAL);
-
         // Add text
         for(int i = 0; i < user_list.length; i++) {
+            // Create a LinearLayout element
+            LinearLayout row = new LinearLayout(c);
+            LinearLayout.LayoutParams params= new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            row.setLayoutParams(params);
+            row.setOrientation(LinearLayout.HORIZONTAL);
+
             TextView tv = new TextView(c);
             tv.setText(user_list[i]);
+            LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
+            params2.weight=1.0f;
+            tv.setLayoutParams(params2);
             Button btn = new Button(c);
             btn.setText("Share");
             btn.setBackgroundColor(Color.YELLOW);
-            btn.setGravity(Gravity.RIGHT);
-            ll.addView(tv);
-            ll.addView(btn);
-        }
+            LinearLayout.LayoutParams params3 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            btn.setLayoutParams(params3);
+            row.addView(tv);
+            row.addView(btn);
 
-        return ll;
+            ll.addView(row);
+        }
     }
 
-    private LinearLayout setUnknownUserList(LinearLayout ll) {
+    private void setUnknownUserList(LinearLayout ll) {
         String[] user_list = getResources().getStringArray(R.array.unk_users);
-
-        // Create a LinearLayout element
-        LinearLayout row = new LinearLayout(c);
-        row.setOrientation(LinearLayout.HORIZONTAL);
 
         // Add text
         for(int i = 0; i < user_list.length; i++) {
+            // Create a LinearLayout element
+            LinearLayout row = new LinearLayout(c);
+            LinearLayout.LayoutParams params= new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            row.setLayoutParams(params);
+            row.setOrientation(LinearLayout.HORIZONTAL);
+
             TextView tv = new TextView(c);
             tv.setText(user_list[i]);
+            LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
+            params2.weight=1.0f;
+            tv.setLayoutParams(params2);
             Button btn = new Button(c);
             btn.setText("Share");
             btn.setBackgroundColor(Color.YELLOW);
-            btn.setGravity(Gravity.RIGHT);
-            ll.addView(tv);
-            ll.addView(btn);
-        }
+            LinearLayout.LayoutParams params3 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            btn.setLayoutParams(params3);
+            row.addView(tv);
+            row.addView(btn);
 
-        return ll;
+            ll.addView(row);
+        }
     }
 }
