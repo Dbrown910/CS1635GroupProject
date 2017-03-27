@@ -1,16 +1,21 @@
 package cs1635.g8.hello;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -51,7 +56,34 @@ public class MainActivity extends AppCompatActivity {
 
         mDrawerList.setOnItemClickListener(new MainActivity.DrawerItemClickListener());
 
+        Log.d("ask", "asking for permissions");
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_CONTACTS)) {
+            Log.d("saving contact", "already asked");
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_CONTACTS}, 1);
 
+        } else {
+
+            Log.d("saving contact", "never asked, asking");
+
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_CONTACTS}, 1);
+
+        }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Log.d("saving contact", "did request permission, granted");
+
+            Context cntx = getApplicationContext();
+            ContactHandler.shared.addContact("John", "9999999999", cntx);
+        } else {
+            Log.d("saving contact", "did request permission, denied");
+
+            // permission denied, boo! Disable the
+            // functionality that depends on this permission.
+        }
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener{

@@ -29,8 +29,6 @@ public class FhomeScreen extends Fragment {
         View v = inflater.inflate(R.layout.fragment_fhome_screen, container, false);
         c = v.getContext();
 
-
-
         return v;
     }
 
