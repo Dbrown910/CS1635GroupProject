@@ -86,40 +86,43 @@ public class fuser_profile extends Fragment {
 
     private void saveInfo(View v){
         LinearLayout ll = (LinearLayout)v.findViewById(R.id.textFields);
-        EditText name = (EditText)ll.getChildAt(0);
-        EditText phNum = (EditText)ll.getChildAt(1);
 
-        if(name.getText().toString().equals("") || phNum.getText().toString().equals("")){
-            AlertDialog.Builder adBuild = new AlertDialog.Builder(v.getContext());
+        if(ll != null) {
+            EditText name = (EditText) ll.getChildAt(0);
+            EditText phNum = (EditText) ll.getChildAt(1);
 
-            adBuild.setTitle("Missing Info");
+            if (name.getText().toString().equals("") || phNum.getText().toString().equals("")) {
+                AlertDialog.Builder adBuild = new AlertDialog.Builder(v.getContext());
 
-            adBuild
-                    .setMessage("Please enter at least a name and phone number")
-                    .setCancelable(false)
-                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id){
-                            dialog.cancel();
-                        }
-                    });
+                adBuild.setTitle("Missing Info");
 
-            AlertDialog ad = adBuild.create();
+                adBuild
+                        .setMessage("Please enter at least a name and phone number")
+                        .setCancelable(false)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
 
-            ad.show();
-        } else {
-            TestFragment fragment = new TestFragment();
-            Bundle args = new Bundle();
+                AlertDialog ad = adBuild.create();
 
-            for (int i = 0; i < ll.getChildCount(); i++) {
-                EditText tb = (EditText) ll.getChildAt(i);
-                if (tb instanceof EditText) {
-                    args.putString(tb.getTag().toString(), tb.getText().toString());
+                ad.show();
+            } else {
+                TestFragment fragment = new TestFragment();
+                Bundle args = new Bundle();
+
+                for (int i = 0; i < ll.getChildCount(); i++) {
+                    EditText tb = (EditText) ll.getChildAt(i);
+                    if (tb instanceof EditText) {
+                        args.putString(tb.getTag().toString(), tb.getText().toString());
+                    }
                 }
-            }
 
-           getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_frame, new TestFragment())
-                    .commit();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_frame, new TestFragment())
+                        .commit();
+            }
         }
     }
 
