@@ -19,6 +19,7 @@ import android.widget.ListView;
 public class MainActivity extends AppCompatActivity {
 
     private static final int RESULT_LOAD_IMAGE = 1;
+    private boolean mToolBarNavigationListenerIsRegistered = false;
     private String[] mOptions;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         mOptions = getResources().getStringArray(R.array.options_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.drawer);
+
         /*mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
 
             *//** Called when a drawer has settled in a completely closed state. *//*
@@ -51,8 +53,9 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);*/
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
 
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, mOptions));
         mDrawerList.setOnItemClickListener(new MainActivity.DrawerItemClickListener());
@@ -71,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener{
