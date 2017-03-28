@@ -3,6 +3,16 @@
     <string name="UserEditTitle">Edit Profile</string>
     <string name="HomeScreenTitle">Contact Share</string>
 
+    <string name="share_success_title">Success!</string>
+    <string name="share_success_message">You have shared contact info with</string>
+    <string name="okay">Ok!</string>
+
+    <string name="share_request_title">Share Request</string>
+    <string name="share_request_message">has requested to share contact information with you!</string>
+    <string name="jbelfort">Jordan Belfort</string>
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
+
     <string name="name_box">Name</string>
     <string name="cell_box">Cell</string>
     <string name="email_box">Email</string>

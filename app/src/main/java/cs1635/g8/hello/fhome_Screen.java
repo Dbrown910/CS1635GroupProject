@@ -1,19 +1,18 @@
 package cs1635.g8.hello;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.net.Uri;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.TypedValue;
-import android.view.Gravity;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+//import android.util.Log;
 
 public class fhome_Screen extends Fragment {
-
+    private static final String TAG = fhome_Screen.class.getSimpleName();
     Context c;
 
     public fhome_Screen() {
@@ -67,8 +66,7 @@ public class fhome_Screen extends Fragment {
     }
 
     private void setUnknownUserList(LinearLayout ll) {
-        String[] user_list = getResources().getStringArray(R.array.unk_users);
-
+        final String[] user_list = getResources().getStringArray(R.array.unk_users);
         // Add text
         for(int i = 0; i < user_list.length; i++) {
             // Create a LinearLayout element
@@ -85,6 +83,43 @@ public class fhome_Screen extends Fragment {
             Button btn = new Button(c);
             btn.setText("Share");
             btn.setBackgroundResource(R.drawable.sharebtn);
+            final int finalI = i;
+            btn.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    //Log.d(TAG, "onClick: " + user_list[finalI]);
+                    final Context context = getContext();
+                    final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                    alertDialogBuilder.setTitle(R.string.share_success_title);
+
+                    alertDialogBuilder
+                            .setMessage(getResources().getString(R.string.share_success_message) + " " + user_list[finalI] + "!")
+                            .setNeutralButton(R.string.okay, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id){
+                                    AlertDialog.Builder ADBuilder2 = new AlertDialog.Builder(context);
+                                    ADBuilder2.setTitle(R.string.share_request_title);
+
+                                    ADBuilder2
+                                            .setMessage(getResources().getString(R.string.jbelfort) + " " +
+                                            getResources().getString(R.string.share_request_message))
+                                            .setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog2, int id2){
+                                                    dialog2.cancel();
+                                                }
+                                            })
+                                            .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog2, int id2){
+                                                    dialog2.cancel();
+                                                }
+                                            });
+                                    AlertDialog aDialog2 = ADBuilder2.create();
+                                    ADBuilder2.show();
+                                }
+                            });
+
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+                }
+            });
             LinearLayout.LayoutParams params3 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             btn.setLayoutParams(params3);
             row.addView(tv);
