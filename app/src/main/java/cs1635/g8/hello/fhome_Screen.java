@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,12 +54,19 @@ public class fhome_Screen extends Fragment {
             row.setLayoutParams(params);
             row.setOrientation(LinearLayout.HORIZONTAL);
 
+            ImageView iv = new ImageView(c);
+            params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            iv.setImageResource(R.mipmap.ic_person);
+            iv.setLayoutParams(params);
+
             TextView tv = new TextView(c);
             tv.setText(user_list[i]);
             LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 150);
             params2.weight=1.0f;
             tv.setLayoutParams(params2);
+            tv.setGravity(Gravity.CENTER_VERTICAL);
             //tv.setTextSize(getResources().getDimension(R.dimen.fab_margin));
+            row.addView(iv);
             row.addView(tv);
 
             ll.addView(row);
@@ -75,11 +83,18 @@ public class fhome_Screen extends Fragment {
             row.setLayoutParams(params);
             row.setOrientation(LinearLayout.HORIZONTAL);
 
+            ImageView iv = new ImageView(c);
+            params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            iv.setImageResource(R.mipmap.ic_person);
+            iv.setLayoutParams(params);
+
             TextView tv = new TextView(c);
             tv.setText(user_list[i]);
             LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
             params2.weight=1.0f;
+            tv.setGravity(Gravity.CENTER_VERTICAL);
             tv.setLayoutParams(params2);
+
             Button btn = new Button(c);
             btn.setText("Share");
             btn.setBackgroundResource(R.drawable.sharebtn);
@@ -122,6 +137,7 @@ public class fhome_Screen extends Fragment {
             });
             LinearLayout.LayoutParams params3 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             btn.setLayoutParams(params3);
+            row.addView(iv);
             row.addView(tv);
             row.addView(btn);
 

@@ -31,13 +31,10 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int RESULT_LOAD_IMAGE = 1;
-    private boolean mToolBarNavigationListenerIsRegistered = false;
     private String[] mOptions;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView mDrawerList;
-    private String mTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
