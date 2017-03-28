@@ -61,7 +61,7 @@ public class fuser_profile extends Fragment {
         save_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveInfo(v);
+                saveInfo();
             }
         });
 
@@ -94,15 +94,16 @@ public class fuser_profile extends Fragment {
 
     }
 
-    private void saveInfo(View v){
-        LinearLayout ll = (LinearLayout)v.findViewById(R.id.textFields);
+    private void saveInfo(){
+        LinearLayout ll = (LinearLayout)getActivity().findViewById(R.id.textFields);
+        Log.d("Were", "in save info");
 
         if(ll != null) {
             EditText name = (EditText) ll.getChildAt(0);
             EditText phNum = (EditText) ll.getChildAt(1);
 
             if (name.getText().toString().equals("") || phNum.getText().toString().equals("")) {
-                AlertDialog.Builder adBuild = new AlertDialog.Builder(v.getContext());
+                AlertDialog.Builder adBuild = new AlertDialog.Builder(getContext());
 
                 adBuild.setTitle("Missing Info");
 
@@ -119,11 +120,12 @@ public class fuser_profile extends Fragment {
 
                 ad.show();
             } else {
-
+                Log.d("Were", "here");
                 for (int i = 0; i < ll.getChildCount(); i++) {
                     EditText tb = (EditText) ll.getChildAt(i);
                     if (tb instanceof EditText) {
-                        //file.write tb.getTag().toString()+ "," + tb.getText().toString();
+                        //TODO: send to text file
+                        Log.d("SAVED", tb.getTag().toString()+ "," + tb.getText().toString());
                     }
                 }
 
