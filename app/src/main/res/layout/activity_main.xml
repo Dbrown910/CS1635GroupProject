@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cs1635.g8.hello.HomeScreen">
+    tools:context="cs1635.g8.hello.MainActivity">
 
     <FrameLayout
         android:id="@+id/content_frame"

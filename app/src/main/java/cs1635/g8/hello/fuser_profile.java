@@ -3,6 +3,7 @@ package cs1635.g8.hello;
 
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -29,6 +30,7 @@ public class fuser_profile extends Fragment {
     Context c;
     Button save_btn;
     ImageButton pro_pic;
+    Bitmap selectedPhoto;
 
     public fuser_profile() {
         // Required empty public constructor
@@ -68,6 +70,18 @@ public class fuser_profile extends Fragment {
 //      if(profile_info.containsKey("Name"))
 //          save_btn.setEnabled(false);
 
+        if (UserManager.shared.currentUser != null) {
+            User u = UserManager.shared.currentUser;
+            LinearLayout ll = (LinearLayout)v.findViewById(R.id.textFields);
+
+            ((EditText)ll.getChildAt(0)).setText(u.name);
+            ((EditText)ll.getChildAt(1)).setText(u.cell);
+            ((EditText)ll.getChildAt(2)).setText(u.email);
+            ((EditText)ll.getChildAt(3)).setText(u.company);
+            ((EditText)ll.getChildAt(4)).setText(u.website);
+            setProfilePicture(u.profilePicture);
+        }
+
         return v;
     }
 
@@ -96,7 +110,6 @@ public class fuser_profile extends Fragment {
 
     private void saveInfo(){
         LinearLayout ll = (LinearLayout)getActivity().findViewById(R.id.textFields);
-        Log.d("Were", "in save info");
 
         if(ll != null) {
             EditText name = (EditText) ll.getChildAt(0);
@@ -120,14 +133,15 @@ public class fuser_profile extends Fragment {
 
                 ad.show();
             } else {
-                Log.d("Were", "here");
-                for (int i = 0; i < ll.getChildCount(); i++) {
-                    EditText tb = (EditText) ll.getChildAt(i);
-                    if (tb instanceof EditText) {
-                        //TODO: send to text file
-                        Log.d("SAVED", tb.getTag().toString()+ "," + tb.getText().toString());
-                    }
-                }
+
+                String personName = ((EditText)ll.getChildAt(0)).getText().toString();
+                String cell = ((EditText)ll.getChildAt(1)).getText().toString();
+                String email = ((EditText)ll.getChildAt(2)).getText().toString();
+                String comp = ((EditText)ll.getChildAt(3)).getText().toString();
+                String site = ((EditText)ll.getChildAt(4)).getText().toString();
+
+
+                UserManager.shared.currentUser = new User(personName, cell, email, comp, site, selectedPhoto);
 
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.content_frame, new fhome_Screen())
@@ -137,9 +151,8 @@ public class fuser_profile extends Fragment {
     }
 
     public void setProfilePicture(Bitmap bmap) {
-        ImageButton btn;
-        btn = (ImageButton) getActivity().findViewById(R.id.imageButton);
+        selectedPhoto = bmap;
         BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), bmap);
-        btn.setBackground(bitmapDrawable);
+        pro_pic.setBackground(bitmapDrawable);
     }
 }

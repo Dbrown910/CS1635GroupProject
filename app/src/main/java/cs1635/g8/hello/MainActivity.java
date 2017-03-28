@@ -1,6 +1,9 @@
 package cs1635.g8.hello;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -9,6 +12,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -83,11 +87,13 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        createNearbyNotification();
+        createShareRequestNotification();
     }
 
-    private class DrawerItemClickListener implements ListView.OnItemClickListener{
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             selectItem(position);
         }
     }
@@ -136,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         switch (position) {
             case 0:
-                if(getSupportFragmentManager().findFragmentById(R.id.frag_user_profile) != null)
+                if (getSupportFragmentManager().findFragmentById(R.id.frag_user_profile) != null)
                     getSupportFragmentManager().beginTransaction().add(R.id.content_frame, new fuser_profile()).commit();
 
                 ft.replace(R.id.content_frame, new fuser_profile());
@@ -144,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                 ft.commit();
                 break;
             case 1:
-                if(getSupportFragmentManager().findFragmentById(R.id.test_frag) != null)
+                if (getSupportFragmentManager().findFragmentById(R.id.test_frag) != null)
                     getSupportFragmentManager().beginTransaction().add(R.id.content_frame, new TestFragment()).commit();
 
                 ft.replace(R.id.content_frame, new TestFragment());
@@ -152,5 +158,76 @@ public class MainActivity extends AppCompatActivity {
                 ft.commit();
                 break;
         }
+    }
+
+    private void createNearbyNotification() {
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.drawable.sharebtn)
+                .setContentTitle("Hello! Nearby contact")
+                .setContentText("Rachel is nearby");
+
+        Intent openThisIntent = new Intent(this, MainActivity.class);
+        PendingIntent resultPendingIntent =
+                PendingIntent.getActivity(
+                        this,
+                        0,
+                        openThisIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+
+        notificationBuilder.setContentIntent(resultPendingIntent);
+        final Notification notification = notificationBuilder.build();
+        final NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(10000);
+                } catch(InterruptedException exception) {
+                    System.out.println("nearby notification thread interrupted");
+                }
+
+                manager.notify(1, notification);
+
+            }
+        });
+
+        thread.start();
+    }
+
+    private void createShareRequestNotification() {
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.drawable.sharebtn)
+                .setContentTitle("Hello! Share Request")
+                .setContentText("Daniel wants to share their contact info");
+
+        Intent shareInfoIntent = new Intent(this, MainActivity.class);
+        PendingIntent resultPendingIntent =
+                PendingIntent.getActivity(
+                        this,
+                        0,
+                        shareInfoIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+
+        notificationBuilder.setContentIntent(resultPendingIntent);
+        final Notification notification = notificationBuilder.build();
+        final NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(5000);
+                } catch(InterruptedException exception) {
+                    System.out.println("share request thread interrupted");
+                }
+
+                manager.notify(2, notification);
+
+            }
+        });
+
+        thread.start();
+
     }
 }
