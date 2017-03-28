@@ -163,8 +163,8 @@ public class MainActivity extends AppCompatActivity {
     private void createNearbyNotification() {
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.sharebtn)
-                .setContentTitle("Nearby Friend Notification")
-                .setContentText("There is a nearby friend");
+                .setContentTitle("Hello! Nearby contact")
+                .setContentText("Rachel is nearby");
 
         Intent openThisIntent = new Intent(this, MainActivity.class);
         PendingIntent resultPendingIntent =
@@ -198,8 +198,8 @@ public class MainActivity extends AppCompatActivity {
     private void createShareRequestNotification() {
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.sharebtn)
-                .setContentTitle("Share Request Notification")
-                .setContentText("Someone wants to share their contact info.");
+                .setContentTitle("Hello! Share Request")
+                .setContentText("Daniel wants to share their contact info");
 
         Intent shareInfoIntent = new Intent(this, MainActivity.class);
         PendingIntent resultPendingIntent =
@@ -217,9 +217,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(10000);
+                    Thread.sleep(5000);
                 } catch(InterruptedException exception) {
-                    System.out.println("nearby notification thread interrupted");
+                    System.out.println("share request thread interrupted");
                 }
 
                 manager.notify(2, notification);
