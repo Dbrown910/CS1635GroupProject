@@ -74,6 +74,7 @@ public class fhome_Screen extends Fragment {
             // Create a LinearLayout element
             LinearLayout row = new LinearLayout(c);
             LinearLayout.LayoutParams params= new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            params.setMargins(3,3,3,3);
             row.setLayoutParams(params);
             row.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -84,7 +85,7 @@ public class fhome_Screen extends Fragment {
             tv.setLayoutParams(params2);
             Button btn = new Button(c);
             btn.setText("Share");
-            btn.setBackgroundColor(Color.YELLOW);
+            btn.setBackgroundResource(R.drawable.sharebtn);
             LinearLayout.LayoutParams params3 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             btn.setLayoutParams(params3);
             row.addView(tv);

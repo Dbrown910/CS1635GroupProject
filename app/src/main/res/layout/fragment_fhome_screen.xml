@@ -11,6 +11,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="3dp"
         android:weightSum="12">
 
         <TextView
@@ -64,7 +65,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingLeft="3dp"
-                android:paddingRight="3dp"/>
+                android:paddingRight="3dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"/>
         </ScrollView>
     </LinearLayout>
 </RelativeLayout>

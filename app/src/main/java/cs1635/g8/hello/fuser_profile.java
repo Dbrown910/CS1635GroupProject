@@ -110,12 +110,12 @@ public class fuser_profile extends Fragment {
                 ad.show();
             } else {
                 TestFragment fragment = new TestFragment();
-                Bundle args = new Bundle();
+                Intent intent = new Intent(c, MainActivity.class);
 
                 for (int i = 0; i < ll.getChildCount(); i++) {
                     EditText tb = (EditText) ll.getChildAt(i);
                     if (tb instanceof EditText) {
-                        args.putString(tb.getTag().toString(), tb.getText().toString());
+                        intent.putExtra(tb.getTag().toString(), tb.getText().toString());
                     }
                 }
 
