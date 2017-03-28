@@ -30,13 +30,19 @@
         <item>John Calipari</item>
         <item>Bill Gates</item>
         <item>Jack Daniels</item>
+        <item>Barack Obama</item>
+        <item>Charlie Sheen</item>
     </string-array>
 
     <string-array name="unk_users">
         <item>Frank Ocean</item>
-        <item>Andrew McCutchen</item>
-        <item>Brad Pitt</item>
+        <item>Kevin Hart</item>
         <item>Tony Montana</item>
+        <item>Brad Pitt</item>
+        <item>Stephen A. Smith</item>
+        <item>Jeremy Lin</item>
+        <item>Katarina Smirnoff</item>
+        <item>Andrew McCutchen</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
