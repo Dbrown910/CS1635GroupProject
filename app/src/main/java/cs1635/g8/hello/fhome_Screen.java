@@ -74,7 +74,6 @@ public class fhome_Screen extends Fragment {
             // Create a LinearLayout element
             LinearLayout row = new LinearLayout(c);
             LinearLayout.LayoutParams params= new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            params.setMargins(3,3,3,3);
             row.setLayoutParams(params);
             row.setOrientation(LinearLayout.HORIZONTAL);
 

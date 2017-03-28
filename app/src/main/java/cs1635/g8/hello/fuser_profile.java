@@ -21,6 +21,7 @@ import android.widget.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
 
 public class fuser_profile extends Fragment {
 
@@ -118,18 +119,16 @@ public class fuser_profile extends Fragment {
 
                 ad.show();
             } else {
-                TestFragment fragment = new TestFragment();
-                Intent intent = new Intent(c, MainActivity.class);
 
                 for (int i = 0; i < ll.getChildCount(); i++) {
                     EditText tb = (EditText) ll.getChildAt(i);
                     if (tb instanceof EditText) {
-                        intent.putExtra(tb.getTag().toString(), tb.getText().toString());
+                        //file.write tb.getTag().toString()+ "," + tb.getText().toString();
                     }
                 }
 
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content_frame, new TestFragment())
+                        .replace(R.id.content_frame, new fhome_Screen())
                         .commit();
             }
         }
