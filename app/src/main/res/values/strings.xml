@@ -55,6 +55,8 @@
         <item>Andrew McCutchen</item>
     </string-array>
 
+    <string name="username">User</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

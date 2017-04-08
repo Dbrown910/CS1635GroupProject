@@ -11,11 +11,11 @@ import android.widget.TextView;
 
 import cs1635.g8.hello.R;
 
-public class TestFragment extends Fragment {
+public class fsettings extends Fragment {
 
     Context c;
 
-    public TestFragment() {
+    public fsettings() {
         // Required empty public constructor
     }
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -19,15 +20,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.view.*;
+import android.widget.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,7 +42,16 @@ public class MainActivity extends AppCompatActivity {
 
         mOptions = getResources().getStringArray(R.array.options_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.drawer);
+        mDrawerList = (ListView) findViewById(R.id.navList);
+        ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
+
+        mNavItems.add(new NavItem("Home", "View contacts & other users", R.drawable.ic_home));
+        mNavItems.add(new NavItem("My Profile", "Edit your contact card", R.drawable.ic_card));
+        mNavItems.add(new NavItem("Settings", "Change your preferences", R.drawable.ic_settings));
+
+        DrawerListAdapter adapter = new DrawerListAdapter(this, mNavItems);
+        mDrawerList.setAdapter(adapter);
+        mDrawerList.setOnItemClickListener(new MainActivity.DrawerItemClickListener());
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
 
@@ -67,23 +74,6 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, mOptions));
-        mDrawerList.setOnItemClickListener(new MainActivity.DrawerItemClickListener());
-
-//        getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
-//            @Override
-//            public void onBackStackChanged() {
-//                int stackHeight = getSupportFragmentManager().getBackStackEntryCount();
-//                if (stackHeight > 0) { // if we have something on the stack (doesn't include the current shown fragment)
-//                    getSupportActionBar().setHomeButtonEnabled(true);
-//                    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//                } else {
-//                    getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-//                    getSupportActionBar().setHomeButtonEnabled(false);
-//                }
-//            }
-//        });
 
         createNearbyNotification();
         createShareRequestNotification();
@@ -136,27 +126,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void selectItem(int position) {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         switch (position) {
             case 0:
-                if (getSupportFragmentManager().findFragmentById(R.id.frag_user_profile) != null)
-                    getSupportFragmentManager().beginTransaction().add(R.id.content_frame, new fuser_profile()).commit();
-
-                ft.replace(R.id.content_frame, new fuser_profile());
-                ft.addToBackStack(null);
-                ft.commit();
-                mDrawerLayout.closeDrawers();
+                setFragment(new fhome_Screen());
                 break;
             case 1:
-                if (getSupportFragmentManager().findFragmentById(R.id.test_frag) != null)
-                    getSupportFragmentManager().beginTransaction().add(R.id.content_frame, new TestFragment()).commit();
-
-                ft.replace(R.id.content_frame, new TestFragment());
-                ft.addToBackStack(null);
-                ft.commit();
-                mDrawerLayout.closeDrawers();
+                setFragment(new fuser_profile());
+                break;
+            case 2:
+                setFragment(new fsettings());
                 break;
         }
+        mDrawerLayout.closeDrawers();
     }
 
     private void createNearbyNotification() {
@@ -228,5 +209,66 @@ public class MainActivity extends AppCompatActivity {
 
         thread.start();
 
+    }
+
+    class NavItem {
+        String mTitle;
+        String mSubtitle;
+        int mIcon;
+
+        public NavItem(String title, String subtitle, int icon) {
+            mTitle = title;
+            mSubtitle = subtitle;
+            mIcon = icon;
+        }
+    }
+
+    class DrawerListAdapter extends BaseAdapter {
+
+        Context mContext;
+        ArrayList<NavItem> mNavItems;
+
+        public DrawerListAdapter(Context context, ArrayList<NavItem> navItems) {
+            mContext = context;
+            mNavItems = navItems;
+        }
+
+        @Override
+        public int getCount() {
+            return mNavItems.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return mNavItems.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view;
+
+            if (convertView == null) {
+                LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                view = inflater.inflate(R.layout.drawer_list_item, null);
+            }
+            else {
+                view = convertView;
+            }
+
+            TextView titleView = (TextView) view.findViewById(R.id.title);
+            TextView subtitleView = (TextView) view.findViewById(R.id.subTitle);
+            ImageView iconView = (ImageView) view.findViewById(R.id.icon);
+
+            titleView.setText( mNavItems.get(position).mTitle );
+            subtitleView.setText( mNavItems.get(position).mSubtitle );
+            iconView.setImageResource(mNavItems.get(position).mIcon);
+
+            return view;
+        }
     }
 }
