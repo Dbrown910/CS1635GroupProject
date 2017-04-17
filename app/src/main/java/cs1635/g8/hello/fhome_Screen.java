@@ -101,6 +101,7 @@ public class fhome_Screen extends Fragment {
             final int finalI = i;
             btn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
+                    sendContactCard();
                     //Log.d(TAG, "onClick: " + user_list[finalI]);
                     final Context context = getContext();
                     final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
@@ -115,7 +116,7 @@ public class fhome_Screen extends Fragment {
 
                                     ADBuilder2
                                             .setMessage(getResources().getString(R.string.jbelfort) + " " +
-                                            getResources().getString(R.string.share_request_message))
+                                                    getResources().getString(R.string.share_request_message))
                                             .setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog2, int id2){
                                                     dialog2.cancel();
@@ -143,5 +144,9 @@ public class fhome_Screen extends Fragment {
 
             ll.addView(row);
         }
+    }
+
+    private void sendContactCard() {
+
     }
 }
