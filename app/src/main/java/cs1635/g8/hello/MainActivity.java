@@ -12,12 +12,16 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBar.Tab;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.*;
@@ -32,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView mDrawerList;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +74,10 @@ public class MainActivity extends AppCompatActivity {
 
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
-        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.getSupportActionBar().setHomeButtonEnabled(true);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
 
         createNearbyNotification();
         createShareRequestNotification();
@@ -132,9 +137,9 @@ public class MainActivity extends AppCompatActivity {
             case 1:
                 setFragment(new fuser_profile());
                 break;
-            case 2:
+            /*case 2:
                 setFragment(new fsettings());
-                break;
+                break;*/
         }
         mDrawerLayout.closeDrawers();
     }
