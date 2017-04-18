@@ -10,6 +10,15 @@ public class User {
     String website;
     Bitmap profilePicture;
 
+    public User() {
+        this.name = "";
+        this.cell = "";
+        this.email = "";
+        this.company = "";
+        this.website = "";
+        this.profilePicture = null;
+    }
+
     public User(String name, String cell, String email, String company, String website, Bitmap profilePic) {
         this.name = name;
         this.cell = cell;

@@ -83,4 +83,6 @@ public class fhome_Screen extends Fragment {
         pagerAdapter.notifyDataSetChanged();
         return v;
     }
+
+
 }
