@@ -60,6 +60,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        createShareRequestNotification();
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+    }
+
+
     //Launches new fragment when an option is selected inside the navigation drawer
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -165,17 +171,78 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    public void onResume(){
-        super.onResume();
+    public void saveToContacts(User u, Context c){
+        u = new User("Jose Cuervo", "555-555-5555", "jc@example.com", "", "", null);
 
-        if(UserManager.shared.currentUser != null){
-            //Add pic to nav drawer menu
-            setContentView(R.layout.activity_main);
-            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-            navigationView.setNavigationItemSelectedListener(this);
-            View hView = navigationView.getHeaderView(0);
-            ImageView avatar = (ImageView) hView.findViewById(R.id.avatar);
-            avatar.setImageBitmap(UserManager.shared.currentUser.profilePicture);
+        ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
+        int contactIndex = ops.size();//ContactSize
+
+        //Newly Inserted contact
+        // A raw contact will be inserted ContactsContract.RawContacts table in contacts database.
+       ops.add(ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)//Step1
+                .withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, null)
+                .withValue(ContactsContract.RawContacts.ACCOUNT_NAME, null).build());
+
+        //Display name will be inserted in ContactsContract.Data table
+        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)//Step2
+                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID,contactIndex)
+                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
+                .withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, u.name) // Name of the contact
+                .build());
+        //Mobile number will be inserted in ContactsContract.Data table
+        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)//Step 3
+                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID,contactIndex)
+                .withValue(ContactsContract.Contacts.Data.MIMETYPE, ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
+                .withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, u.cell)
+                .withValue(ContactsContract.CommonDataKinds.Phone.TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE).build()); //Type like HOME, MOBILE etc
+        try {
+            // We will do batch operation to insert all above data
+            //Contains the output of the app of a ContentProviderOperation.
+            //It is sure to have exactly one of uri or count set
+            ContentProviderResult[] contentProresult = null;
+            contentProresult = getContentResolver().applyBatch(ContactsContract.AUTHORITY, ops); //apply above data insertion into contacts list
+        } catch (OperationApplicationException e) {
+            Log.d("Failed: OpAppException", e.toString());
+        } catch (RemoteException e){
+            Log.d("Failed RemoteEx", e.toString());
+        }
+    }
+
+    public void getPermissions() {
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+
+            if (checkSelfPermission(Manifest.permission.READ_CONTACTS)
+                    == PackageManager.PERMISSION_DENIED) {
+                String[] permissions = {Manifest.permission.READ_CONTACTS};
+
+                requestPermissions(permissions, PERMISSION_REQUEST_CODE);
+            }
+            if (checkSelfPermission(Manifest.permission.WRITE_CONTACTS) ==  PackageManager.PERMISSION_DENIED) {
+
+                String[] permissions = {Manifest.permission.WRITE_CONTACTS};
+                requestPermissions(permissions, PERMISSION_REQUEST_CODE);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    Log.d("Hello", "PERMISSIONS GRANTED");
+                    saveToContacts(new User(), context);
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
         }
     }
 }
