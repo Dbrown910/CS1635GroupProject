@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        createShareRequestNotification();
     }
 
-
     //Launches new fragment when an option is selected inside the navigation drawer
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -164,5 +163,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         thread.start();
 
+    }
+
+    public void onResume(){
+        super.onResume();
+
+        if(UserManager.shared.currentUser != null){
+            //Add pic to nav drawer menu
+            setContentView(R.layout.activity_main);
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView.setNavigationItemSelectedListener(this);
+            View hView = navigationView.getHeaderView(0);
+            ImageView avatar = (ImageView) hView.findViewById(R.id.avatar);
+            avatar.setImageBitmap(UserManager.shared.currentUser.profilePicture);
+        }
     }
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -143,6 +144,17 @@ public class fuser_profile extends Fragment {
 
                 UserManager.shared.currentUser = new User(personName, cell, email, comp, site, selectedPhoto);
 
+                if(UserManager.shared.currentUser != null){
+                    //Add pic to nav drawer menu
+                    NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
+                    navigationView.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) getActivity());
+                    View hView = navigationView.getHeaderView(0);
+                    ImageView avatar = (ImageView) hView.findViewById(R.id.avatar);
+                    TextView user_name = (TextView) hView.findViewById(R.id.userName);
+                    avatar.setImageBitmap(UserManager.shared.currentUser.profilePicture);
+                    user_name.setText(personName);
+                }
+
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.content_frame, new fhome_Screen())
                         .commit();
@@ -154,5 +166,7 @@ public class fuser_profile extends Fragment {
         selectedPhoto = bmap;
         BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), bmap);
         pro_pic.setBackground(bitmapDrawable);
+
+
     }
 }

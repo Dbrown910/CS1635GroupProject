@@ -35,31 +35,7 @@ public class fHomeScreen_Nearby extends Fragment {
         ll = (LinearLayout) v.findViewById(R.id.nearbyLL);
 
         //Populate user_list
-        String[] user_list = getResources().getStringArray(R.array.known_users);
-        for(int i = 0; i < user_list.length; i++) {
-            // Create a LinearLayout element
-            LinearLayout row = new LinearLayout(c);
-            LinearLayout.LayoutParams params= new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            row.setLayoutParams(params);
-            row.setOrientation(LinearLayout.HORIZONTAL);
-
-            ImageView iv = new ImageView(c);
-            params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            iv.setImageResource(R.mipmap.ic_person);
-            iv.setLayoutParams(params);
-
-            TextView tv = new TextView(c);
-            tv.setText(user_list[i]);
-            LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 150);
-            params2.weight=1.0f;
-            tv.setLayoutParams(params2);
-            tv.setGravity(Gravity.CENTER_VERTICAL);
-            //tv.setTextSize(getResources().getDimension(R.dimen.fab_margin));
-            row.addView(iv);
-            row.addView(tv);
-
-            ll.addView(row);
-        }
+        setNearbyUserList(ll);
 
         return v;
     }
@@ -68,11 +44,9 @@ public class fHomeScreen_Nearby extends Fragment {
         super.onViewCreated(v, savedInstanceState);
     }
 
-    public void onResume(){
-        super.onResume();
-    }
 
-    private void setUnknownUserList(LinearLayout ll) {
+
+    private void setNearbyUserList(LinearLayout ll) {
         //Populate user_list
         String[] user_list = getResources().getStringArray(R.array.known_users);
         for(int i = 0; i < user_list.length; i++) {
