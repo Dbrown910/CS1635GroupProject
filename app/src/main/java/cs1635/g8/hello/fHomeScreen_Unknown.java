@@ -74,27 +74,15 @@ public class fHomeScreen_Unknown extends Fragment {
                     alertDialogBuilder.setTitle(R.string.share_success_title);
 
                     alertDialogBuilder
-                            .setMessage(getResources().getString(R.string.share_success_message) + " " + user_list[finalI] + "!")
-                            .setNeutralButton(R.string.okay, new DialogInterface.OnClickListener() {
+                            .setMessage("Are you sure you want to share your contact information with" + " " + user_list[finalI] + "?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id){
-                                    AlertDialog.Builder ADBuilder2 = new AlertDialog.Builder(context);
-                                    ADBuilder2.setTitle(R.string.share_request_title);
-
-                                    ADBuilder2
-                                            .setMessage(getResources().getString(R.string.jbelfort) + " " +
-                                                    getResources().getString(R.string.share_request_message))
-                                            .setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog2, int id2){
-                                                    dialog2.cancel();
-                                                }
-                                            })
-                                            .setNegativeButton(R.string.decline, new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog2, int id2){
-                                                    dialog2.cancel();
-                                                }
-                                            });
-                                    AlertDialog aDialog2 = ADBuilder2.create();
-                                    ADBuilder2.show();
+                                    //Initiate contact share
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id){
+                                    // :(
                                 }
                             });
 

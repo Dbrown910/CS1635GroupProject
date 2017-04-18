@@ -69,9 +69,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             setFragment(new fhome_Screen());
         }else if(id == R.id.my_profile) {
             setFragment(new fuser_profile());
-        }else if(id == R.id.settings) {
-            setFragment(new fsettings());
         }
+
+//        else if(id == R.id.settings) {
+//            setFragment(new fsettings());
+//        }
 
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;

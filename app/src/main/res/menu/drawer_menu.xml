@@ -9,8 +9,5 @@
         android:id="@+id/my_profile"
         android:title="Edit Profile"
         android:icon="@drawable/ic_card" />
-    <item
-        android:id="@+id/settings"
-        android:title="Settings"
-        android:icon="@drawable/ic_settings" />
+
 </menu>
