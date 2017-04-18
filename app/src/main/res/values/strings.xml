@@ -2,38 +2,49 @@
     <string name="app_name">Hello!</string>
     <string name="UserEditTitle">Edit Profile</string>
     <string name="HomeScreenTitle">Contact Share</string>
-
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
     <string name="share_success_title">Success!</string>
     <string name="share_success_message">You have shared contact info with</string>
     <string name="okay">Ok!</string>
-
     <string name="share_request_title">Share Request</string>
     <string name="share_request_message">has requested to share contact information with you!</string>
     <string name="jbelfort">Jordan Belfort</string>
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>
-
     <string name="name_box">Name</string>
     <string name="cell_box">Cell</string>
     <string name="email_box">Email</string>
     <string name="company_box">Company</string>
     <string name="website_box">Website</string>
-
     <string name="topSVlabel">Nearby Friends</string>
     <string name="bottomSVlabel">Unknown Users</string>
     <string name="title_activity_home__screen">Home_Screen</string>
-
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
-
     <string name="action_settings">Settings</string>
+    <string name="username">User</string>
+    <string name="hello_blank_fragment">Hello!</string>
 
     <string-array name="options_array">
         <item>My Profile</item>
         <item>Settings</item>
     </string-array>
 
+    <string-array name="tabs_array">
+        <item>Nearby Friends</item>
+        <item>Unknown Users</item>
+    </string-array>
+
     <string-array name="known_users">
+        <item>Dave Chappelle</item>
+        <item>Kanye West</item>
+        <item>Michael Jordan</item>
+        <item>John Calipari</item>
+        <item>Bill Gates</item>
+        <item>Jack Daniels</item>
+        <item>Barack Obama</item>
+        <item>Charlie Sheen</item>
         <item>Dave Chappelle</item>
         <item>Kanye West</item>
         <item>Michael Jordan</item>
@@ -53,11 +64,14 @@
         <item>Jeremy Lin</item>
         <item>Katarina Smirnoff</item>
         <item>Andrew McCutchen</item>
+        <item>Frank Ocean</item>
+        <item>Kevin Hart</item>
+        <item>Tony Montana</item>
+        <item>Brad Pitt</item>
+        <item>Stephen A. Smith</item>
+        <item>Jeremy Lin</item>
+        <item>Katarina Smirnoff</item>
+        <item>Andrew McCutchen</item>
     </string-array>
-
-    <string name="username">User</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

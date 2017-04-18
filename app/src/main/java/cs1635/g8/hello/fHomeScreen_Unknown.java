@@ -1,6 +1,5 @@
 package cs1635.g8.hello;
 
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -10,20 +9,14 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.*;
+//import android.util.Log;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
-public class fUnknown_Users extends Fragment {
-
+public class fHomeScreen_Unknown extends Fragment {
+    private static final String TAG = fHomeScreen_Unknown.class.getSimpleName();
     Context c;
 
-    public fUnknown_Users() {
+    public fHomeScreen_Unknown() {
         // Required empty public constructor
     }
 
@@ -36,16 +29,15 @@ public class fUnknown_Users extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_unknown_users, container, false);
+        View v = inflater.inflate(R.layout.fragment_unknown, container, false);
         c = v.getContext();
-
+        setUnknownUserList((LinearLayout)v.findViewById(R.id.unknownLL));
         return v;
     }
 
-    @Override
     public void onViewCreated(View v, Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
-        setUnknownUserList((LinearLayout) v.findViewById(R.id.botLL));
+        setUnknownUserList((LinearLayout)v.findViewById(R.id.unknownLL));
     }
 
     private void setUnknownUserList(LinearLayout ll) {
@@ -76,7 +68,6 @@ public class fUnknown_Users extends Fragment {
             final int finalI = i;
             btn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    //TODO: Send the contact info and save to other users phone
                     //Log.d(TAG, "onClick: " + user_list[finalI]);
                     final Context context = getContext();
                     final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);

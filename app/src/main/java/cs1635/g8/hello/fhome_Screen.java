@@ -4,25 +4,27 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.*;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import android.widget.Toolbar;
 //import android.util.Log;
 
 public class fhome_Screen extends Fragment {
-    private static final String TAG = fhome_Screen.class.getSimpleName();
-    Context c;
 
-    private ViewPager mViewPager;
-    private CustAdapter mCustAdapter;
+    private String[] pageTitle;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private ViewPagerAdapter pagerAdapter;
+
+    private static final String TAG_FRAGMENT = fhome_Screen.class.getSimpleName();
+    Context c;
 
     public fhome_Screen() {
         // Required empty public constructor
@@ -31,7 +33,7 @@ public class fhome_Screen extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        pagerAdapter = new ViewPagerAdapter(getFragmentManager());
     }
 
     @Override
@@ -40,49 +42,45 @@ public class fhome_Screen extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_fhome_screen, container, false);
         c = v.getContext();
+        pagerAdapter.notifyDataSetChanged();
+        viewPager = (ViewPager) v.findViewById(R.id.view_pager);
+        pageTitle = getResources().getStringArray(R.array.tabs_array);
 
-        mCustAdapter = new CustAdapter(getActivity().getSupportFragmentManager());
-        mViewPager = (ViewPager) v.findViewById(R.id.pager);
-        mViewPager.setAdapter(mCustAdapter);
-        return v;
-    }
-
-    @Override
-    public void onViewCreated(View v, Bundle savedInstanceState) {
-        super.onViewCreated(v, savedInstanceState);
-
-        mCustAdapter = new CustAdapter(getChildFragmentManager());
-        mViewPager = (ViewPager) v.findViewById(R.id.pager);
-        mViewPager.setAdapter(mCustAdapter);
-
-        //TODO: set the tab frame with the known user list by default
-
-        //final ActionBar ab = getActivity().getSupport;
-    }
-
-
-    public static class CustAdapter extends FragmentPagerAdapter {
-        FragmentManager fm;
-        public CustAdapter(FragmentManager _fm) {
-            super(_fm);
-            fm = _fm;
+        //setting Tab layout (number of Tabs = number of ViewPager pages)
+        tabLayout = (TabLayout) v.findViewById(R.id.tab_layout);
+        for (int i = 0; i < 2; i++) {
+            tabLayout.addTab(tabLayout.newTab().setText(pageTitle[i]));
         }
 
-        @Override
-        public int getCount() {
-            return 2;
-        }
+        //set gravity for tab bar
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        @Override
-        public Fragment getItem(int position) {
-            switch (position) {
-                case 0:
-                    return new fKnown_Users();
-                case 1:
-                    return new fUnknown_Users();
+        //set viewpager adapter
+        viewPager.setAdapter(pagerAdapter);
+
+
+        //change Tab selection when swipe ViewPager
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        //change ViewPager page when tab selected
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
             }
 
-            return null;
-        }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                //Do nothing
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                //Do nothing
+            }
+        });
+
+        pagerAdapter.notifyDataSetChanged();
+        return v;
     }
 }
